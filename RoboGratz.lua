@@ -75,7 +75,10 @@ function MDGZ:CHAT_MSG_GUILD(...)
 	local msg=...
 	local senderName=select(2,...)
 	msg=string.lower(msg)
-	if (senderName == UnitName("player")) then return end
+	if (senderName == UnitName("player")) then 
+    lastAutoGreet=time()+20
+    return 
+  end
 	if (lastAutoGreet < time()) then
   
 		for i = 1, #greetPatterns do
