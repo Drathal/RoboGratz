@@ -38,7 +38,7 @@ local greets={ "Hallo","Hui","Huhu","halo","hallo","hai","wuhu","tach","hi","hal
 local byes={ "bye","tschüss","tschau","bis morgen","bis dann","bb","bubu","nachti"}
 
 local greetPatterns = {"abend","hallo","huhu","servus","sers","was geht","halo","guten morgen","moin","hai","hi","tag","holla","guten abend"}
-local byePatterns={"bye","tschüss","tschau","bis morgen","bis dann","bb","gute nacht","g8","nachti","gn8"}
+local byePatterns={"bye","tschüss","tschau","bis morgen","bis dann","bb","gute nacht","g8","nachti","gn8","Tschöö"}
 
 totals=weighted_total(msgs)
 
@@ -56,15 +56,14 @@ end
 
 function MDGZ:CHAT_MSG_GUILD_ACHIEVEMENT(...)
 	if (lastMsg < time())then
-		local arg={...}
-		local msg="gz"
-		local name=arg[2]
-		local msg=weighted_random_choice(msgs)
+		local arg = {...}
+		local name = arg[2]
+		local msg = weighted_random_choice(msgs)
     
     name=string.gsub(name,"%-[^|]+", "")
         
 		if (name ~=UnitName("player"))then
-			msg=string.gsub(msg, "{name}", name)
+			msg = string.gsub(msg, "{name}", name)
       RoboGratz:ScheduleTimer(DelayChatMessage, 2, msg)
 		end
 		lastMsg=time()+2 --2 seconds 
@@ -83,18 +82,18 @@ function MDGZ:CHAT_MSG_GUILD(...)
   
 		for i = 1, #greetPatterns do
 			if (string.find(string.gsub(msg,"(.*)"," %1 "), "[^%a]"..greetPatterns[i].."[^%a]"))then
-        RoboGratz:ScheduleTimer(DelayChatMessage, math.random(1, 5), greets[math.random(#greets)])
+        RoboGratz:ScheduleTimer(DelayChatMessage, math.random(2, 5), greets[math.random(#greets)])
 				lastAutoGreet=time()+20
 				return
 			end	
 		end
 		if (msg=="re") then
-      RoboGratz:ScheduleTimer(DelayChatMessage,  math.random(1, 3), "wb")
+      RoboGratz:ScheduleTimer(DelayChatMessage,  math.random(2, 3), "wb")
 			lastAutoGreet=time()+20
 		end
 		for i = 1, #byePatterns do
 			if (string.find(string.gsub(msg,"(.*)"," %1 "), "[^%a]"..byePatterns[i].."[^%a]"))then
-        RoboGratz:ScheduleTimer(DelayChatMessage,  math.random(1, 5), byes[math.random(#byes)])
+        RoboGratz:ScheduleTimer(DelayChatMessage,  math.random(2, 5), byes[math.random(#byes)])
 				lastAutoGreet=time()+20
 				return
 			end
