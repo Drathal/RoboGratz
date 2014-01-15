@@ -83,18 +83,18 @@ function MDGZ:CHAT_MSG_GUILD(...)
   
 		for i = 1, #greetPatterns do
 			if (string.find(string.gsub(msg,"(.*)"," %1 "), "[^%a]"..greetPatterns[i].."[^%a]"))then
-        RoboGratz:ScheduleTimer(DelayChatMessage, 2, greets[math.random(#greets)])
+        RoboGratz:ScheduleTimer(DelayChatMessage, math.random(1, 5), greets[math.random(#greets)])
 				lastAutoGreet=time()+20
 				return
 			end	
 		end
 		if (msg=="re") then
-      RoboGratz:ScheduleTimer(DelayChatMessage, 2, "wb")
+      RoboGratz:ScheduleTimer(DelayChatMessage,  math.random(1, 3), "wb")
 			lastAutoGreet=time()+20
 		end
 		for i = 1, #byePatterns do
 			if (string.find(string.gsub(msg,"(.*)"," %1 "), "[^%a]"..byePatterns[i].."[^%a]"))then
-        RoboGratz:ScheduleTimer(DelayChatMessage, 4, byes[math.random(#byes)])
+        RoboGratz:ScheduleTimer(DelayChatMessage,  math.random(1, 5), byes[math.random(#byes)])
 				lastAutoGreet=time()+20
 				return
 			end
